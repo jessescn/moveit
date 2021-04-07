@@ -6,7 +6,9 @@ Aplicação que te estimula a se exercitar enquanto você trabalha!
 
 ## Tecnologias
 
-As tecnologias utilizadas no projeto foram Next.js e React. 
+As tecnologias utilizadas no projeto foram Next.js e React.
+
+O backend em Node para login e persistência dos dados está [neste repositório](https://github.com/jessescn/moveit-api).
 
 ## Instalação
 
