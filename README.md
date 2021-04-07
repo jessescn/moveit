@@ -2,8 +2,6 @@
 
 Aplicação que te estimula a se exercitar enquanto você trabalha!
 
-Você pode conferior o deploy [aqui!](https://moveit-next-five-tau.vercel.app/)
-
 ## Tecnologias
 
 As tecnologias utilizadas no projeto foram Next.js e React. 
