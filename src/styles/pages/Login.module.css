@@ -1,0 +1,68 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 2.5rem 2rem;
+  display: flex;
+
+  background: #F6F4F4;
+  color: var(--white);
+
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container div {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.btnContainer {
+  width: 10rem;
+  text-align: center;
+}
+
+.container button {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+
+  background: var(--title);
+  color: var(--white);
+
+  border: 0;
+  border-radius: 5px;
+  padding: 0.8rem 2rem;
+  font-size: 1.5rem;
+
+  transition: 0.2s;
+}
+
+.container button:hover {
+  background: var(--orange-dark);
+  transform: scale(1.04);
+}
+
+.container button svg {
+  margin-right: 0.7rem;
+}
+
+.workout {
+  width: 25rem;
+}
+
+@media (max-width: 600px){
+  .container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container div {
+    display: block;
+    text-align: center;
+  }
+
+  .workout {
+    width: 60vw;
+  }
+}

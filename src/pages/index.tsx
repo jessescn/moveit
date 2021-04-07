@@ -11,30 +11,40 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { CountdownProvider } from "../contexts/CountdownContexts";
 import { ChallengesProvider } from "../contexts/ChallengesContexts";
+import { getSession } from "next-auth/client";
 
-interface HomeProps {
+type User = {
+  name: string,
+  email: string,
+  image: string,
   level: number,
   currentExperience: number,
   challengesCompleted: number
 }
 
-export default function Home(props: HomeProps) {
+interface HomeProps {
+  user: User
+}
+
+export default function Home({ user }: HomeProps) {  
+
   return (
-    <ChallengesProvider 
-        level={props.level} 
-        currentExperience={props.currentExperience}
-        challengesCompleted={props.challengesCompleted}
+    <ChallengesProvider
+        email={user.email}
+        level={user.level} 
+        currentExperience={user.currentExperience}
+        challengesCompleted={user.challengesCompleted}
         >
       <div className={styles.container}>
         <Head>
-          <title>Inicio | MoveIt </title>
+          <title>Home | MoveIt </title>
         </Head>
         <ExperienceBar  />
 
         <CountdownProvider>
           <section>
             <div>
-              <Profile />
+              <Profile name={user.name} image={user.image} />
               <CompletedChallenges />
               <Countdown />
             </div>
@@ -48,14 +58,23 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const session = await getSession({ req })
+
+  if(!session){
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      },
+      
+    }
+  }
+
   return {
     props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      user: session.user
     }
   }
 }

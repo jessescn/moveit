@@ -24,6 +24,23 @@
     margin-top: 0.5rem;
 }
 
+.profileContainer div button {
+    color: var(--white);
+    background: var(--orange);
+    
+    border: 0;
+    padding: 0 1rem;
+    border-radius: 2px;
+    margin: 0.5rem 0 0 1rem;
+
+    transition: background 0.2s;
+
+}
+
+.profileContainer div button:hover {
+    background: var(--orange-dark);
+}
+
 .profileContainer div p img {
     margin-right: 0.5rem;
 }

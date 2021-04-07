@@ -1,16 +1,14 @@
-import { createContext, useState, ReactNode, useEffect, useContext } from 'react';
-
-import Cookies from 'js-cookie';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 
 import challenges from '../../challenges.json';
 import { LevelUpModal } from '../components/LevelUpModal';
+import { updateUser } from '../services/api';
 
 interface Challenge {
     type: 'body' | 'eye',
     description: string,
     amount: number
 }
-
 
 interface ChallengesContextData {
     level: number, 
@@ -28,6 +26,7 @@ interface ChallengesContextData {
 interface ChallengesProviderProps {
     children: ReactNode;
     level: number,
+    email: string,
     currentExperience: number,
     challengesCompleted: number
 }
@@ -48,9 +47,13 @@ export function ChallengesProvider({ children, ...rest } : ChallengesProviderPro
     }, [])
 
     useEffect(() => {
-        Cookies.set('level', String(level));
-        Cookies.set('currentExperience', String(currentExperience));
-        Cookies.set('challengesCompleted', String(challengesCompleted));
+        updateUser(
+            rest.email, 
+            {   level, 
+                currentExperience, 
+                challenges: challengesCompleted 
+            })
+            .then(resp => { console.log(resp) })
 
     }, [level, currentExperience, challengesCompleted])
 

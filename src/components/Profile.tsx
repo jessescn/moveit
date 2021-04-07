@@ -1,20 +1,26 @@
+import { signOut } from 'next-auth/client';
 import { useContext } from 'react';
 import { challengesContext } from '../contexts/ChallengesContexts';
 import styles from '../styles/components/Profile.module.css';
 
-export function Profile(){
+interface ProfileProps {
+    name: string;
+    image: string;
+}
+
+export function Profile({ name, image }: ProfileProps){
 
     const { level } = useContext(challengesContext);
-
     return(
         <div className={styles.profileContainer}>
-            <img src="https://github.com/jessescn.png" alt="Jessé Souza"/>
+            <img src={image} alt="User name"/>
             <div>
-                <strong>Jessé Souza</strong>
+                <strong>{name}</strong>
                 <p>
                     <img src="icons/level.svg" alt="level"/>
                     Level { level }
                 </p>
+                <button onClick={() => signOut() }>Sair</button>
             </div>
         </div>
     )
